@@ -1,22 +1,15 @@
-"""Extract thumbnails for Youtube videos and download them as jpg files.
-
-Once you run the script, input the link of Youtube videos.
-
-There is no exception handler included in this script, so don't test the behavior by putting erroneous inputs. 
-
-Modify the parts with comments to configure settings like the format, download path, etc. 
-"""
-
 import yt_dlp
+from yt_dlp.postprocessor import FFmpegPostProcessor
+FFmpegPostProcessor._ffmpeg_location.set(R'C:\\Users\\logan\\Desktop\\Delve\\Cyber\\Project\\UNCLASSIFIED\\MacGyver\\yt-dlp-related\\ffmpeg\\bin\\ffmpeg.exe')  # ffmpeg location
 
 def download_thumbnail(link):
     ydl_opts = {
         'postprocessors': [{
-          'format': 'jpg',  # set the image format
+          'format': 'jpg',  # set image format
           'key': 'FFmpegThumbnailsConvertor',
           'when': 'before_dl'
         }],
-        'outtmpl': "D:\logan\Media\음악\Spotify Album Cover\%(title)s.%(ext)s",  # set the output path and filename
+        'outtmpl': "M:\\Other computers\\My PC\\음악\\Spotify Album Cover\\%(title)s.%(ext)s",  # set output path and filename
         'skip_download': True,  # skip downloading the video
         'writethumbnail': True,
     }

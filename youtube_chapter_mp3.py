@@ -1,15 +1,7 @@
-"""Extract audio for each chapter of the video and download it as a separate mp3 file.
-
-Once you run the script, input the link of Youtube videos THAT HAVE CHAPTERS. 
-
-This script is intended for Youtube videos with chapters, so I do not know what will happen for non-chaptered videos.
-
-There is no exception handler included in this script, so don't test the behavior by putting erroneous inputs. 
-
-Modify the parts with comments to configure settings like audio quality, format, download path, etc. 
-"""
 import yt_dlp
 import os
+from yt_dlp.postprocessor import FFmpegPostProcessor
+FFmpegPostProcessor._ffmpeg_location.set(R'C:\\Users\\logan\\Desktop\\Delve\\Cyber\\Project\\UNCLASSIFIED\\MacGyver\\yt-dlp-related\\ffmpeg\\bin\\ffmpeg.exe')  # set ffmpeg location
 
 def download_audio(LINK):
     ydl_opts = {
@@ -17,14 +9,14 @@ def download_audio(LINK):
         'postprocessors': [{
           'key': 'FFmpegExtractAudio',
           'nopostoverwrites': False,
-          'preferredcodec': 'mp3',  # set the output file's format to mp3
+          'preferredcodec': 'mp3',  # set output file's format to mp3
           'preferredquality': '320',  # set audio bit rate to 320kbps 
         },
         {
           'key': 'FFmpegSplitChapters',
           'force_keyframes': False,
         }],
-        'outtmpl': {'chapter': "D:\\logan\\Media\\음악\\%(title)s - %(section_title)s.%(ext)s"}, # set the download path
+        'outtmpl': {'chapter': "M:\\Other computers\\My PC\\음악\\%(title)s - %(section_title)s.%(ext)s"}, # set download path
     }
     
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:  
